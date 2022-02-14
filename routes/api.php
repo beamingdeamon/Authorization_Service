@@ -19,10 +19,10 @@ use App\Http\Controllers\ValidateController;
 
 Route::post('/login', [UserController::class, 'authenticate']);
 Route::post('/register', [UserController::class, 'register']);
+Route::get('/users', [UserController::class, 'getUserInfo']);
 
 Route::group(['middleware' => ['jwt.verify']], function(){
     Route::get('/user', [UserController::class, 'getUsers']);
-    Route::get('/user/{id}', [UserController::class, 'getUserInfo']);
     Route::put('/user/{id}', [UserController::class, 'changeUser']);
     Route::delete('/user/{id}', [UserController::class, 'deleteUser']);
     Route::post('/{route}', [GatewayController::class, 'proxy']);

@@ -81,8 +81,9 @@ class UserController extends Controller
       return $data ;
   }
 
-  public function getUserInfo($id){
-    return response()->json(User::find($id));
+  public function getUserInfo(){
+    $data = User::all();
+    return $data ;
   }
 
 
