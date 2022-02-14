@@ -15,7 +15,7 @@ Please run this backend on 5000 port. It will be possible with command: php arti
 and with wich request you must have JWT token
 ___
 
-### Requests for Ticket
+### Requests for User
 
 POST Register User
 >localhost:5000/api/register
