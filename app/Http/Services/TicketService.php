@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Http\Services;
 
-use JWTAuth;
+use App\JWT\Jwt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,8 +23,9 @@ class TicketService{
         return $response; 
     }
 
-    public function CreateMessage($string_json){
-        $user = JWTAuth::parseToken()->toUser();
+    public function CreateMessage(Request $request){
+        $string_json = $request->json;
+        $user = Jwt::validation($request->bearerToken());
         $response = Http::post('http://localhost:8000/api/createmessage/', [
         'ticket_id'=>$string_json["ticket_id"],
         'user_id'=> $user->id,

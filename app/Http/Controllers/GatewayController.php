@@ -25,7 +25,7 @@ class GatewayController extends Controller
             $ticket->GetTicketbyId($id);
         }
         else if ($route == 'createmessage'){
-            $ticket->CreateMessage($request->json);
+            $ticket->CreateMessage($request);
         }
         else if ($route == 'getmessages'){
             $ticket->GetMessages();

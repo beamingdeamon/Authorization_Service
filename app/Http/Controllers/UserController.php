@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use JWTAuth;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use App\JWT\Jwt;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -44,36 +45,28 @@ class UserController extends Controller
   }
   
   public function authenticate(Request $request){
-    $credentials = $request->only('email', 'password');
-
-    $validator = Validator::make($credentials, [
-        'email' => 'required|email',
+    $validator = Validator::make($request->only('email', 'password'), [
+        'email' => 'required|email|exists:users,email',
         'password' => 'required|string|min:6|max:50'
     ]);
-
     if ($validator->fails()) {
         return response()->json(['error' => $validator->messages()], 200);
     }
 
-    try {
-      if (! $token = JWTAuth::attempt($credentials)) {
-        return response()->json([
-          'success' => false,
-          'message' => 'Login credentials are invalid.',
-        ], 400);
-      }
-    } catch (JWTException $e) {
-    return $credentials;
-      return response()->json([
-          'success' => false,
-          'message' => 'Could not create token.',
-        ], 500);
-    }
+    $user = User::where('email', $request->email)->first();
+    if (Hash::check($request->password, $user->password)){
+      
+      $payload = json_encode([
+        'id' => $user->id,
+        'exp' => Carbon::now()->addDays(1)->timestamp
+      ]);
 
-    return response()->json([
-        'success' => true,
-        'token' => $token,
-    ]);
+        
+      $jwt = Jwt::generate($payload);
+      return response()->json(['jwt' => $jwt], 200);
+    }else{
+      return response()->json(['succes' => 'false'], 401);
+    }
   }
 
   public function getUsers(){
@@ -82,8 +75,10 @@ class UserController extends Controller
   }
 
   public function getUserInfo(){
+
     $data = User::all();
     return $data ;
+    
   }
 
 
