@@ -63,7 +63,7 @@ class UserController extends Controller
 
         
       $jwt = Jwt::generate($payload);
-      return response()->json(['jwt' => $jwt], 200);
+      return response()->json(['accessToken' => $jwt], 200);
     }else{
       return response()->json(['succes' => 'false'], 401);
     }
