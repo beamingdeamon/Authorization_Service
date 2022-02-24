@@ -19,7 +19,7 @@ class UserController extends Controller
 {
 
   public function register(Request $request){
-    $data = $request->only('email', 'first_name', 'last_name', 'password','role','permission');
+    $data = $request->only('email', 'first_name', 'last_name', 'password','role_id');
     $validator = Validator::make($data, [
       'email' => 'required|email|unique:users',
       'first_name' => 'required|string',
@@ -43,6 +43,10 @@ class UserController extends Controller
       'first_name'=> $request->first_name,
       'last_name'=> $request->last_name,
       'role_id'=> $request->role_id,
+    ]);
+    MailVerification::create([
+      'user_id'=>$user->id,
+      'verified'=> false
     ]);
 
     return response()->json([
@@ -74,7 +78,7 @@ class UserController extends Controller
       $jwt = Jwt::generate($payload);
       $tokens = Token::create([
         'user_id'=>$user->id,
-        'accessToken'=>$jwt,
+        'access_token'=>$jwt,
       ]);
       return response()->json(['accessToken' => $jwt], 200);
     }else{
@@ -82,8 +86,9 @@ class UserController extends Controller
     }
   }
 
-  public function deleteUser($id){
-    User::findOrFail($id)->delete();
+  public function deleteUser(){
+    $user = Jwt::validation($request->bearerToken());
+    User::findOrFail($user->id)->delete();
     return response()->json('Delete succesfuly', 200);
   }
  

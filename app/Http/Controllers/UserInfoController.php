@@ -1,49 +1,37 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
+use App\JWT\Jwt;
 use App\Models\UserInfo;
 use App\Http\Requests\StoreUserInfoRequest;
 use App\Http\Requests\UpdateUserInfoRequest;
 
 class UserInfoController extends Controller
 {
-    public function getInfo()
+    public function getInfo(Request $request)
     {
+        $user = Jwt::validation($request->bearerToken());
+        return response()->json(UserInfo::with('user.mailVerification','role')->find($user->id));
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\UserInfo  $userInfo
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UserInfo $userInfo)
+    public function changeUserInfo(Request $request)
     {
-        //
+        
+        $user = Jwt::validation($request->bearerToken());
+        $user_info = UserInfo::findOrFail($user->id);
+        $data = $request->only('first_name', 'last_name', 'role_id');
+        $validator = Validator::make($data, [
+          'first_name' => 'string',
+          'last_name' => 'string',
+          'role_id' => 'int'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->messages()], 200);
+        }
+        $role->update($validator);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateUserInfoRequest  $request
-     * @param  \App\Models\UserInfo  $userInfo
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateUserInfoRequest $request, UserInfo $userInfo)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\UserInfo  $userInfo
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(UserInfo $userInfo)
-    {
-        //
-    }
 }

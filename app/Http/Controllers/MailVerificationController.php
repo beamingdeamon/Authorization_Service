@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
+use App\JWT\Jwt;
 use App\Models\MailVerification;
-use App\Http\Requests\StoreMailVerificationRequest;
-use App\Http\Requests\UpdateMailVerificationRequest;
 
 class MailVerificationController extends Controller
 {
@@ -13,74 +14,17 @@ class MailVerificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function verifyEmail(Request $request)
     {
-        //
+        $user = Jwt::validation($request->bearerToken());
+        $mail_verification = MailVerification::findOrFail($user->id);
+        $validator = Validator::make($request->only('verified'), [
+          'verified' => 'required|boolean'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->messages()], 200);
+        }
+        $mail_verification->update($validator);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreMailVerificationRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreMailVerificationRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\MailVerification  $mailVerification
-     * @return \Illuminate\Http\Response
-     */
-    public function show(MailVerification $mailVerification)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\MailVerification  $mailVerification
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(MailVerification $mailVerification)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMailVerificationRequest  $request
-     * @param  \App\Models\MailVerification  $mailVerification
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateMailVerificationRequest $request, MailVerification $mailVerification)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\MailVerification  $mailVerification
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(MailVerification $mailVerification)
-    {
-        //
-    }
 }
