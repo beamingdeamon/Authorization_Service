@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserInfo;
+use App\Models\Token;
+use App\Models\Role;
+use App\Models\MailVerification;
+
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
@@ -20,8 +25,7 @@ class UserController extends Controller
       'first_name' => 'required|string',
       'last_name' => 'required|string',
       'password' => 'required|string|min:6|max:50',
-      'role'=> 'required|string',
-      'permission'=>'required|string'
+      'role_id'=> 'required|int',
     ]);
     if ($validator->fails()) {
         return response()->json(['error' => $validator->messages()], 200);
@@ -29,11 +33,16 @@ class UserController extends Controller
 
     $user = User::create([
       'email' => $request->email,
-      'first_name' => $request->first_name,
-      'last_name' => $request->last_name,
       'password' => bcrypt($request->password),
-      'role'=>$request->role,
-      'permission' => $request->permission,
+    ]);
+
+
+
+    UserInfo::create([
+      'user_id'=>$user->id,
+      'first_name'=> $request->first_name,
+      'last_name'=> $request->last_name,
+      'role_id'=> $request->role_id,
     ]);
 
     return response()->json([
@@ -63,34 +72,19 @@ class UserController extends Controller
 
         
       $jwt = Jwt::generate($payload);
+      $tokens = Token::create([
+        'user_id'=>$user->id,
+        'accessToken'=>$jwt,
+      ]);
       return response()->json(['accessToken' => $jwt], 200);
     }else{
       return response()->json(['succes' => 'false'], 401);
     }
   }
 
-  public function getUsers(){
-      $data = User::all();
-      return $data ;
-  }
-
-  public function getUserInfo(){
-
-    $data = User::all();
-    return $data ;
-    
-  }
-
-
-  public function changeUser($id, Request $request){
-    $user = User::findOrFail($id);
-    $user->update($request->all());
-    return response()->json($user, 200);
-  }
-
   public function deleteUser($id){
     User::findOrFail($id)->delete();
-    return response('Delete sucesfully', 200);
+    return response()->json('Delete succesfuly', 200);
   }
  
 }

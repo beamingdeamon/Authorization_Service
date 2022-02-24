@@ -18,23 +18,23 @@ class GatewayController extends Controller
             return response()->json(['error' => $validator->messages()], 200);
         };
         if ($route == 'gettickets'){
-            $ticket->GetTickets();
+            $ticket->getTickets();
         }
         else if ($route == 'getticketbyid'){
             $id = $request->json;
-            $ticket->GetTicketbyId($id);
+            $ticket->getTicketbyId($id);
         }
         else if ($route == 'createmessage'){
-            $ticket->CreateMessage($request);
+            $ticket->createMessage($request);
         }
         else if ($route == 'getmessages'){
-            $ticket->GetMessages();
+            $ticket->getMessages();
         }
         else if ($route == 'getmessagesbyticketid'){
-            $ticket->GetMessagesbyTicketId($request->json);
+            $ticket->getMessagesbyTicketId($request->json);
         }
         else{
-            return response('Bad request', 300);
+            return response()->json('Bad Request', 300);
         }
         
         return response()->json($ticket);

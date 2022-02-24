@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Token extends Model
+class UserInfo extends Model
 {
     protected $fillable = [
-        'user_id','access_token'
+        'user_id','first_name','last_name'
     ];
   #  use HasFactory;
     public $timestamps = false;
