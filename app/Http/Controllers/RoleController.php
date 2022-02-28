@@ -19,18 +19,20 @@ class RoleController extends Controller
           'permission' => 'required|string',
         ]);
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->messages()], 200);
+            return response()->json(['error' => $validator->messages()], 300);
         }
     
         $role = Role::create([
           'role' => $request->role,
           'permission' => $request->permission,
         ]);
+        
+        return response()->json($role, 200);
     }
 
     public function getRoles()
     {
-        return response()->json(Role::all());
+        return response()->json(Role::all(), 200);
     }
     public function changeRole(Request $request, $id)
     {
@@ -42,9 +44,11 @@ class RoleController extends Controller
           'permission' => 'string',
         ]);
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->messages()], 200);
+            return response()->json(['error' => $validator->messages()], 300);
         }
-        $role->update($validator);
+        $role->update($data);
+        
+        return response()->json(['Change succesfully'], 200);
     }
     public function deleteRole($id)
     {

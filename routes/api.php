@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\GatewayController;
 use App\Http\Controllers\UserInfoController;
+use App\Http\Controllers\TokenController;
 use App\Http\Controllers\MailVerificationController;
 
 

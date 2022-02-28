@@ -11,7 +11,7 @@ class TokenController extends Controller
     public function deleteToken(Request $request)
     {
         $user = Jwt::validation($request->bearerToken());
-        $role = Token::findOrFail($user->id)->delete();
+        $token = Token::where('user_id',$user->id)->firstOrFail()->delete();
         return response()->json('Logout Succesfully', 200);
     }
 }

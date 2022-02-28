@@ -28,7 +28,7 @@ class UserController extends Controller
       'role_id'=> 'required|int',
     ]);
     if ($validator->fails()) {
-        return response()->json(['error' => $validator->messages()], 200);
+        return response()->json(['error' => $validator->messages()], 300);
     }
 
     $user = User::create([

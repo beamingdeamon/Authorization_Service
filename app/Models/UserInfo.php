@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserInfo extends Model
 {
+  use HasFactory;
     protected $fillable = [
         'user_id','first_name','last_name','role_id'
     ];
-  #  use HasFactory;
     public $timestamps = false;
 
     public function user(){

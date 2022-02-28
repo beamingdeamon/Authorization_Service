@@ -13,7 +13,7 @@ class UserInfoController extends Controller
     public function getInfo(Request $request)
     {
         $user = Jwt::validation($request->bearerToken());
-        return response()->json(UserInfo::with('user.mailVerification','role')->find($user->id));
+        return response()->json(UserInfo::with('user.mailVerification','role')->find($user->id), 200);
         
     }
 
@@ -32,6 +32,7 @@ class UserInfoController extends Controller
             return response()->json(['error' => $validator->messages()], 200);
         }
         $role->update($validator);
+        return response()->json(['Change succesfully'], 200);
     }
 
 }

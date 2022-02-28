@@ -25,6 +25,7 @@ class MailVerificationController extends Controller
             return response()->json(['error' => $validator->messages()], 200);
         }
         $mail_verification->update($validator);
+        return response()->json(['succes'], 200);
     }
 
 }

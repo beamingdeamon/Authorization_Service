@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UserInfo;
 use Illuminate\Database\Seeder;
 
 class UserInfoSeeder extends Seeder
@@ -13,6 +14,8 @@ class UserInfoSeeder extends Seeder
      */
     public function run()
     {
-        //
+        UserInfo::factory()
+        ->count(3)
+        ->create();
     }
 }
