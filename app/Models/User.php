@@ -10,19 +10,12 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User  extends Authenticatable implements JWTSubject
 {
     protected $fillable = [
-        'email','first_name', 'last_name', 'password','role', 'permission'
+        'email', 'password'
     ];
     protected $hidden = [
-      'password','remember_token'
+      'password'
     ];
    use HasFactory;
-  public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-  public function getJWTCustomClaims()
-  {
-      return [];
-  }
+  
     public $timestamps = false;
 }

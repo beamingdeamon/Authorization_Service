@@ -10,12 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 class TicketService{
 
     
-    public function GetTickets(){
+    public function getTickets(){
         $response = Http::get('http://localhost:8000/api/gettickets/');
         return $response; 
     }
 
-    public function GetTicketbyId($id){
+    public function getTicketbyId($id){
         $url = 'http://localhost:8000/api/getticketbyid/';
         $url .= $id;
         
@@ -23,7 +23,7 @@ class TicketService{
         return $response; 
     }
 
-    public function CreateMessage(Request $request){
+    public function createMessage(Request $request){
         $string_json = $request->json;
         $user = Jwt::validation($request->bearerToken());
         $response = Http::post('http://localhost:8000/api/createmessage/', [
@@ -34,12 +34,12 @@ class TicketService{
         return $response;
     }
 
-    public function GetMessages(){
+    public function getMessages(){
         $response = Http::get('http://localhost:8000/api/getmessages/');
         return $response; 
     }
 
-    public function GetMessagesbyTicketId($id){
+    public function getMessagesbyTicketId($id){
         $url = 'http://localhost:8000/api/getmessages';
         $url .= $id;
 

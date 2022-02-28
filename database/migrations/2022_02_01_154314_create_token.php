@@ -13,12 +13,11 @@ class CreateToken extends Migration
      */
     public function up()
     {
-        Schema::create('token', function (Blueprint $table) {
+        Schema::create('tokens', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
             $table->string('access_token');
-            $table->string('refresh_token');
         });
     }
 
