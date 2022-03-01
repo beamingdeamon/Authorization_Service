@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\JWT\Jwt;
 use App\Models\MailVerification;
+use Illuminate\Support\Facades\Validator;
 
 class MailVerificationController extends Controller
 {
@@ -18,14 +19,12 @@ class MailVerificationController extends Controller
     {
         $user = Jwt::validation($request->bearerToken());
         $mail_verification = MailVerification::findOrFail($user->id);
-        $validator = Validator::make($request->only('verified'), [
+        $validator = $this->validate($request, [
           'verified' => 'required|boolean'
         ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->messages()], 200);
-        }
+        
         $mail_verification->update($validator);
-        return response()->json(['succes'], 200);
+        return response()->json('succes', 200);
     }
 
 }

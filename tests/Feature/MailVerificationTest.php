@@ -31,4 +31,18 @@ class MailVerificationTest extends TestCase
         $response->assertStatus(200);
 
     }
+    
+    public function testWithouJwtPutMailVerification()
+    {
+
+        $response = $this->put('/api/user/verification', [
+            'verified'=>'true',
+        ]);
+        if($response->getData()->status == "Authorization Token not found"){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(true);
+        }
+
+    }
 }

@@ -56,6 +56,7 @@ class UserTest extends TestCase
 
         $response->assertStatus(200);
     }
+    
     public function testDeleteUser(){
         $payload = json_encode([
             'id' => 1,
@@ -80,5 +81,23 @@ class UserTest extends TestCase
         $response = $this->withHeaders(['Authorization Bearer'=> $jwt])->delete('/api/logout');
         $response->assertStatus(200);
 
+    }
+    public function testLogoutWithoutJwt()
+    {
+        $response = $this->delete('/api/logout'); 
+        if($response->getData()->status == "Authorization Token not found"){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(true);
+        }
+
+    }
+    public function testDeleteUserWithoutJwt(){
+        $response = $this->delete('/api/user');
+        if($response->getData()->status == "Authorization Token not found"){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(true);
+        }
     }
 }

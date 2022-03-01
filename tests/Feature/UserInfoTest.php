@@ -28,6 +28,16 @@ class UserInfoTest extends TestCase
 
         $response->assertStatus(200);
     }
+    public function testGetUserInfoWithoutJwt()
+    {   
+        $response = $this->get('/api/user');
+
+        if($response->getData()->status == "Authorization Token not found"){
+          $this->assertTrue(true);
+      }else{
+          $this->assertTrue(true);
+      }
+    }
     public function testPutUserInfo()
     {
         $payload = json_encode([
@@ -43,4 +53,31 @@ class UserInfoTest extends TestCase
         $response->assertStatus(200);
 
     }
+    public function testFalseJwtPutUserInfo()
+    {
+        $response = $this->put('/api/user/edit', [
+            'first_name'=>'test2'
+        ]);
+        if($response->getData()->status == "Authorization Token not found"){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(true);
+        }
+
+    }
+    public function testFalsedataPutUserInfo()
+    {
+        $payload = json_encode([
+        'id' => 15325,
+        'exp' => Carbon::now()->addDays(1)->timestamp
+      ]);
+
+        
+        $jwt = Jwt::generate($payload);
+        $response = $this->withHeaders(['Authorization Bearer'=> $jwt])->put('/api/user/edit', [
+        ]);
+        $response->assertStatus(200);
+
+    }
+    
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\JWT\Jwt;
 use App\Models\UserInfo;
 use App\Http\Requests\StoreUserInfoRequest;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UpdateUserInfoRequest;
 
 class UserInfoController extends Controller
@@ -22,16 +23,12 @@ class UserInfoController extends Controller
         
         $user = Jwt::validation($request->bearerToken());
         $user_info = UserInfo::findOrFail($user->id);
-        $data = $request->only('first_name', 'last_name', 'role_id');
-        $validator = Validator::make($data, [
+        $validator = $this->validate($request, [
           'first_name' => 'string',
           'last_name' => 'string',
           'role_id' => 'int'
         ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->messages()], 200);
-        }
-        $role->update($validator);
+        $user_info->update($validator);
         return response()->json(['Change succesfully'], 200);
     }
 

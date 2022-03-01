@@ -86,7 +86,7 @@ class UserController extends Controller
     }
   }
 
-  public function deleteUser(){
+  public function deleteUser(Request $request){
     $user = Jwt::validation($request->bearerToken());
     User::findOrFail($user->id)->delete();
     return response()->json('Delete succesfuly', 200);

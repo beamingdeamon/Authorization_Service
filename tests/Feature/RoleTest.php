@@ -47,6 +47,17 @@ class RoleTest extends TestCase
         $response->assertStatus(200);
 
     }
+    
+    public function testFalsePutRole()
+    {
+        $id = 21304;
+        $response = $this->put('/api/role/'.$id, [
+            'role'=>'test1',
+            'permission'=>'test1'
+        ]);
+        $response->assertStatus(404);
+
+    }
     public function testPutFalseRole()
     {
         $id = Role::all()->random()->id;
@@ -61,5 +72,12 @@ class RoleTest extends TestCase
         $response = $this->delete('/api/role/'.$id);
 
         $response->assertStatus(200);
+    }
+    
+    public function testFalseDeleteRole(){
+        $id = 213541;
+        $response = $this->delete('/api/role/'.$id);
+
+        $response->assertStatus(404);
     }
 }
