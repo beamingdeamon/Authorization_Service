@@ -10,7 +10,11 @@ In the files have a 'Ticket.postman_collection.json'
 
 It's json by the postman for look every requests
 
-Please run this backend on 5000 port. It will be possible with command: php artisan serve --port=5000
+Please run this backend on 5000 port. It will be possible with command: 
+
+```php
+php artisan serve --port=5000
+```
 
 and with wich request you must have JWT token
 ___
