@@ -21,11 +21,11 @@ ___
 
 ### Requests for User
 
-POST Register User
+**POST Register User**
 >localhost:5000/api/register
 >>when you login you must send only six value in the body. It's 'email','first_name', 'last_name', 'password', 'permision' and 'role'
 
-Request: 
+***Request: ***
 ```json
 {
     "email": "dadasfa@mail.ru",
@@ -36,11 +36,11 @@ Request:
 }
 ```
 
-POST Login User
+**POST Login User**
 >localhost:5000/api/login
 >>when you login you must send only two value in the body. It's 'email' and 'password'
 
-Response: 
+***Response: ***
 ```json
 {
     "succes": "true",
@@ -48,10 +48,10 @@ Response:
 }
 ```
 
-GET User Info
+**GET User Info**
 >http://localhost:5000/api/user
 
-Response: 
+***Response: ***
 ```json
 {
     "id": 1,
@@ -76,21 +76,21 @@ Response:
 }
 ```
 
-PUT Change User
+**PUT Change User**
 >http://localhost:5000/api/user
 >> You can add any existing property to json when you change user
 
-Response: 
+***Response: ***
 ```json
 {
     "Change succesfully"
 }
 ```
 
-DEL Delete User
+**DEL Delete User**
 >http://localhost:5000/api/user
 
-Response: 
+***Response: ***
 ```json
 {
     "Delete sucesfully"
@@ -100,11 +100,11 @@ Response:
 
 ### Requests for Roles
 
-POST Create Role
+**POST Create Role**
 >localhost:5000/api/role
 >>when you create role you must send only two value in the body. It's 'role' and 'permission'
 
-Response: 
+***Response:*** 
 ```json
 {
     "role": "user",
@@ -113,10 +113,10 @@ Response:
 }
 ```
 
-GET All Roles
+**GET All Roles**
 >http://localhost:5000/api/role
 
-Response: 
+***Response: ***
 ```json
 {
     {
@@ -132,30 +132,30 @@ Response:
 }
 ```
 
-PUT Change Role
+**PUT Change Role**
 >http://localhost:5000/api/role
 >> You can add any existing property to json when you change role
 
-Response: 
+***Response: ***
 ```json
 {
     "Change succesfully"
 }
 ```
 
-DEL Delete User
+**DEL Delete User**
 >http://localhost:5000/api/role
 
-Response: 
+***Response: ***
 ```json
 {   
     "Delete sucesfully"
 }
 ```
 ### Verificate Email for User
-PUT Verify Email
+**PUT Verify Email**
 >http://localhost:5000/api/user/verification
-Request:
+***Request:***
 ```json
 {
     "verified":true
@@ -163,7 +163,7 @@ Request:
 ```
 
 
-Response: 
+***Response: ***
 ```json
 {
     "Change succesfully"
