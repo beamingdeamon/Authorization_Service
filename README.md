@@ -25,7 +25,7 @@ ___
 >localhost:5000/api/register
 >>when you login you must send only six value in the body. It's 'email','first_name', 'last_name', 'password', 'permision' and 'role'
 
-***Request: ***
+___Request: ___
 ```json
 {
     "email": "dadasfa@mail.ru",
@@ -40,7 +40,7 @@ ___
 >localhost:5000/api/login
 >>when you login you must send only two value in the body. It's 'email' and 'password'
 
-***Response: ***
+___Response: ___
 ```json
 {
     "succes": "true",
@@ -51,7 +51,7 @@ ___
 **GET User Info**
 >http://localhost:5000/api/user
 
-***Response: ***
+___Response: ___
 ```json
 {
     "id": 1,
@@ -80,7 +80,7 @@ ___
 >http://localhost:5000/api/user
 >> You can add any existing property to json when you change user
 
-***Response: ***
+___Response: ___
 ```json
 {
     "Change succesfully"
@@ -90,7 +90,7 @@ ___
 **DEL Delete User**
 >http://localhost:5000/api/user
 
-***Response: ***
+___Response: ___
 ```json
 {
     "Delete sucesfully"
@@ -104,7 +104,7 @@ ___
 >localhost:5000/api/role
 >>when you create role you must send only two value in the body. It's 'role' and 'permission'
 
-***Response:*** 
+___Response: ___ 
 ```json
 {
     "role": "user",
@@ -116,7 +116,7 @@ ___
 **GET All Roles**
 >http://localhost:5000/api/role
 
-***Response: ***
+___Response: ___
 ```json
 {
     {
@@ -136,7 +136,7 @@ ___
 >http://localhost:5000/api/role
 >> You can add any existing property to json when you change role
 
-***Response: ***
+___Response: ___
 ```json
 {
     "Change succesfully"
@@ -146,7 +146,7 @@ ___
 **DEL Delete User**
 >http://localhost:5000/api/role
 
-***Response: ***
+___Response: ___
 ```json
 {   
     "Delete sucesfully"
@@ -155,7 +155,8 @@ ___
 ### Verificate Email for User
 **PUT Verify Email**
 >http://localhost:5000/api/user/verification
-***Request:***
+
+___Request: ___
 ```json
 {
     "verified":true
@@ -163,7 +164,7 @@ ___
 ```
 
 
-***Response: ***
+___Response: ___
 ```json
 {
     "Change succesfully"
