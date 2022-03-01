@@ -3,7 +3,7 @@ Authorization service
 It's my project work by php laravel.
 
 In this project I was developed the support service
-____
+*_
 Requests for backend
 --------------------
 In the files have a **'Ticket.postman_collection.json'**
@@ -17,7 +17,7 @@ php artisan serve --port=5000
 ```
 
 and with wich request you must have JWT token
-___
+*
 
 ### Requests for User
 
@@ -25,7 +25,7 @@ ___
 >localhost:5000/api/register
 >>when you login you must send only six value in the body. It's 'email','first_name', 'last_name', 'password', 'permision' and 'role'
 
-___Request: ___
+*Request: *
 ```json
 {
     "email": "dadasfa@mail.ru",
@@ -40,7 +40,7 @@ ___Request: ___
 >localhost:5000/api/login
 >>when you login you must send only two value in the body. It's 'email' and 'password'
 
-___Response: ___
+*Response: *
 ```json
 {
     "succes": "true",
@@ -51,7 +51,7 @@ ___Response: ___
 **GET User Info**
 >http://localhost:5000/api/user
 
-___Response: ___
+*Response: *
 ```json
 {
     "id": 1,
@@ -80,7 +80,7 @@ ___Response: ___
 >http://localhost:5000/api/user
 >> You can add any existing property to json when you change user
 
-___Response: ___
+*Response: *
 ```json
 {
     "Change succesfully"
@@ -90,7 +90,7 @@ ___Response: ___
 **DEL Delete User**
 >http://localhost:5000/api/user
 
-___Response: ___
+*Response: *
 ```json
 {
     "Delete sucesfully"
@@ -104,7 +104,7 @@ ___Response: ___
 >localhost:5000/api/role
 >>when you create role you must send only two value in the body. It's 'role' and 'permission'
 
-___Response: ___ 
+*Response: * 
 ```json
 {
     "role": "user",
@@ -116,7 +116,7 @@ ___Response: ___
 **GET All Roles**
 >http://localhost:5000/api/role
 
-___Response: ___
+*Response: *
 ```json
 {
     {
@@ -136,7 +136,7 @@ ___Response: ___
 >http://localhost:5000/api/role
 >> You can add any existing property to json when you change role
 
-___Response: ___
+*Response: *
 ```json
 {
     "Change succesfully"
@@ -146,7 +146,7 @@ ___Response: ___
 **DEL Delete User**
 >http://localhost:5000/api/role
 
-___Response: ___
+*Response: *
 ```json
 {   
     "Delete sucesfully"
@@ -156,7 +156,7 @@ ___Response: ___
 **PUT Verify Email**
 >http://localhost:5000/api/user/verification
 
-___Request: ___
+*Request: *
 ```json
 {
     "verified":true
@@ -164,7 +164,7 @@ ___Request: ___
 ```
 
 
-___Response: ___
+*Response: *
 ```json
 {
     "Change succesfully"
