@@ -25,7 +25,8 @@ and with wich request you must have JWT token
 >localhost:5000/api/register
 >>when you login you must send only six value in the body. It's 'email','first_name', 'last_name', 'password', 'permision' and 'role'
 
-*Request: *
+_Request:_
+
 ```json
 {
     "email": "dadasfa@mail.ru",
@@ -40,7 +41,8 @@ and with wich request you must have JWT token
 >localhost:5000/api/login
 >>when you login you must send only two value in the body. It's 'email' and 'password'
 
-*Response: *
+_Response:_
+
 ```json
 {
     "succes": "true",
@@ -51,7 +53,8 @@ and with wich request you must have JWT token
 **GET User Info**
 >http://localhost:5000/api/user
 
-*Response: *
+_Response:_
+
 ```json
 {
     "id": 1,
@@ -80,7 +83,8 @@ and with wich request you must have JWT token
 >http://localhost:5000/api/user
 >> You can add any existing property to json when you change user
 
-*Response: *
+_Response:_
+
 ```json
 {
     "Change succesfully"
@@ -90,7 +94,8 @@ and with wich request you must have JWT token
 **DEL Delete User**
 >http://localhost:5000/api/user
 
-*Response: *
+_Response:_
+
 ```json
 {
     "Delete sucesfully"
@@ -104,7 +109,8 @@ and with wich request you must have JWT token
 >localhost:5000/api/role
 >>when you create role you must send only two value in the body. It's 'role' and 'permission'
 
-*Response: * 
+_Response:_
+
 ```json
 {
     "role": "user",
@@ -116,7 +122,8 @@ and with wich request you must have JWT token
 **GET All Roles**
 >http://localhost:5000/api/role
 
-*Response: *
+_Response:_
+
 ```json
 {
     {
@@ -136,7 +143,8 @@ and with wich request you must have JWT token
 >http://localhost:5000/api/role
 >> You can add any existing property to json when you change role
 
-*Response: *
+_Response:_
+
 ```json
 {
     "Change succesfully"
@@ -146,7 +154,8 @@ and with wich request you must have JWT token
 **DEL Delete User**
 >http://localhost:5000/api/role
 
-*Response: *
+_Response:_
+
 ```json
 {   
     "Delete sucesfully"
@@ -156,7 +165,8 @@ and with wich request you must have JWT token
 **PUT Verify Email**
 >http://localhost:5000/api/user/verification
 
-*Request: *
+_Request:_
+
 ```json
 {
     "verified":true
@@ -164,7 +174,8 @@ and with wich request you must have JWT token
 ```
 
 
-*Response: *
+_Response:_
+
 ```json
 {
     "Change succesfully"
