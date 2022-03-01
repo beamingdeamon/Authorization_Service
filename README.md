@@ -28,7 +28,7 @@ Request:
     "first_name": "Eldar",
     "last_name": "Shakhzhanov",
     "password": "123321",
-    "role_id": $role_id,
+    "role_id": "$role_id",
 }
 ```
 
@@ -88,7 +88,10 @@ DEL Delete User
 
 Response: 
 ```json
-Delete sucesfully
+{
+    "Delete sucesfully"
+}
+
 ```
 
 ### Requests for Roles
@@ -102,7 +105,7 @@ Response:
 {
     "role": "user",
     "permission": "user",
-    "id": ...
+    "id": "..."
 }
 ```
 
@@ -141,7 +144,9 @@ DEL Delete User
 
 Response: 
 ```json
-Delete sucesfully
+{   
+    "Delete sucesfully"
+}
 ```
 ### Verificate Email for User
 PUT Verify Email
