@@ -34,7 +34,7 @@ class GatewayController extends Controller
             $ticket->getMessagesbyTicketId($request->json);
         }
         else{
-            return response('Bad request', 300);
+            return response()->json('Bad Request', 300);
         }
         
         return response()->json($ticket);

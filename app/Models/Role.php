@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Token extends Model
+class Role extends Model
 {
-   use HasFactory;
     protected $fillable = [
-        'user_id','access_token'
+        'role','permission'
     ];
+  #  use HasFactory;
     public $timestamps = false;
 }

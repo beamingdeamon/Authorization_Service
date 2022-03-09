@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Token extends Model
+class MailVerification extends Model
 {
-   use HasFactory;
+    use HasFactory;
     protected $fillable = [
-        'user_id','access_token'
+        'user_id','verified'
     ];
+    
+    public function mailVerification(){
+      return $this->belongsTo(User::class, 'user_id');
+    }
+    
     public $timestamps = false;
 }

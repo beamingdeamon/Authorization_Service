@@ -57,15 +57,15 @@ class Jwt{
         $signatureValid = ($base64UrlSignature === $signatureProvided);
         
         if ($tokenExpired) {
-            return  "Token has expired.";
+            return response()->json('Token has expired', 200);
         } else {
-            return "Token has not expired yet.";
+            return response()->json('Token has not expired yet', 300);
         }
         
         if ($signatureValid) {
-            return "The signature is valid.";
+            return response()->json('Signature is valid', 200);
         } else {
-            return "The signature is NOT valid";
+            return response()->json('Signature is NOT valid', 300);
         }
     }
 
