@@ -28,7 +28,7 @@ class UserController extends Controller
       'role_id'=> 'required|int',
     ]);
     if ($validator->fails()) {
-        return response()->json(['error' => $validator->messages()], 200);
+        return response()->json(['error' => $validator->messages()], 300);
     }
 
     $user = User::create([
@@ -86,7 +86,7 @@ class UserController extends Controller
     }
   }
 
-  public function deleteUser(){
+  public function deleteUser(Request $request){
     $user = Jwt::validation($request->bearerToken());
     User::findOrFail($user->id)->delete();
     return response()->json('Delete succesfuly', 200);

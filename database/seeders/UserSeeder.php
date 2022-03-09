@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\MailVerification;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class MailVerificationSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class MailVerificationSeeder extends Seeder
      */
     public function run()
     {
-        MailVerification::factory()
+        User::factory()
         ->count(3)
         ->create();
     }

@@ -12,10 +12,13 @@ class RoleFactory extends Factory
      *
      * @return array
      */
+    
+    protected $model = Role::class;
     public function definition()
     {
         return [
-            //
+            'role'=> $this->faker->unique()->word,
+            'permission'=> $this->faker->unique()->word,
         ];
     }
 }

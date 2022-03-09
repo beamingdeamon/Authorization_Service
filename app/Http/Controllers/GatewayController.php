@@ -15,7 +15,7 @@ class GatewayController extends Controller
         'json' => 'nullable',
         ]);
         if ($data->fails()) {
-            return response()->json(['error' => $validator->messages()], 200);
+            return response()->json(['error' => $validator->messages()], 300);
         };
         if ($route == 'gettickets'){
             $ticket->getTickets();

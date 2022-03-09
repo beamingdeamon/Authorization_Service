@@ -5,6 +5,9 @@ namespace Tests\Unit;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 use PHPUnit\Framework\TestCase;
+use App\JWT\Jwt;
+use Carbon\Carbon;
+
 
 class ExampleTest extends TestCase
 {
@@ -17,28 +20,67 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+    public function test_example1()
+    {
+        $this->assertTrue(true);
+    }
+    public function test_example2()
+    {
+        $this->assertTrue(true);
+    }
+    public function testJwtGeneration(){
+        $payload = json_encode([
+            'id' => 1,
+            'exp' => Carbon::now()->addDays(1)->timestamp
+          ]);
     
-    public function test_register(){
-        $response = Http::post('http:://localhost=>5000/api/register/', [
-                'email'=> 'dadasfa21312@mail.ru',
-                'first_name'=> 'Eldar',
-                'last_name'=> 'Shakhzhanov',
-                'password'=> '123321',
-                'role'=> 'user',
-                'permission'=>'user'
-            ]);
-            return $response;
+            
+          $jwt = Jwt::generate($payload);
+          if(isset($jwt)){
+            $this->assertTrue(true);
+          }
     }
-
-    public function test_login(){
-        $response = Http::post('http:://localhost=>5000/api/register/', [
-            'email'=> 'dadasfa21312@mail.ru',
-            'password'=> '123321'
+    
+    public function testFalseJwtGeneration(){
+        $payload = json_encode([]);
+    
+            
+          $jwt = Jwt::generate($payload);
+          if(isset($jwt)){
+            $this->assertTrue(true);
+          }
+    }
+    
+    public function testGetDataFromJwt(){
+        $id=1;
+        $payload = json_encode([
+            'id' => $id,
+            'exp' => Carbon::now()->addDays(1)->timestamp
         ]);
-        return $response;
+    
+            
+          $jwt = Jwt::generate($payload);
+          $validated_data = Jwt::validation($jwt);
+          if($validated_data->id == $id){
+            $this->assertTrue(true);
+          }
     }
-
-    public function test_get_user(){
-
+    
+    public function testValidateJwt(){
+        $id=1;
+        $payload = json_encode([
+            'id' => $id,
+            'exp' => Carbon::now()->addDays(1)->timestamp
+        ]);
+    
+            
+          $jwt = Jwt::generate($payload);
+          $validated_data = Jwt::validation($jwt);
+          if($validated_data->id == $id){
+            $this->assertTrue(true);
+          }
     }
+    
+    
+    
 }
